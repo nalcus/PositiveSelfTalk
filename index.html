@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- Copyright 2015 Nicholas Alcus
+
+Positive Self-Talk is a single user chat application written using angular.js
+
+Licenced under the WTFPL licence.
+see LICENSE.text
+-->
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Positive Self-Talk</title>
+  <meta name="description" content="Positive Self-Talk">
+  <meta name="author" content="Nicholas Alcus">
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+  <script>
+  angular.module('chatApp', [])
+  .controller('ChatController', function () {
+    var chatList = this;
+    chatList.chats = [{
+      text: 'This is a single user chat app written in angular.js'
+    }, {
+      text: 'use it to talk to yourself'
+    }];
+
+    chatList.addChat = function () {
+      chatList.chats.push({
+        text: chatList.chatText
+      });
+      chatList.chatText = '';
+    };
+
+  });
+  </script>
+  <style>
+  body {
+    margin:10px;
+  }
+  </style>
+</head>
+<body >
+  <div ng-app="chatApp">
+    <h2>Positive Self-Talk</h2>
+    <div ng-controller="ChatController as chatList">
+      <p ng-repeat="chat in chatList.chats"> <span class="chattext">{{chat.text}}</span>
+
+      </p>
+      <form ng-submit="chatList.addChat()">
+        <input type="text" ng-model="chatList.chatText" size="30" placeholder="add new chat here">
+        <input class="btn-primary" type="submit" value="Send">
+      </form>
+    </div>
+  </div>
+</body>
+</html>
